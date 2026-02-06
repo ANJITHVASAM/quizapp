@@ -5,10 +5,10 @@ function Result({ questions, answers }) {
   const score = questions.filter((q) => answers[q.id] === q.rightAnswer).length;
 
   return (
-    <div className="card">
-      <h2>Result</h2>
-      <p>
-        Your Score: {score} / {questions.length}
+    <div className="options">
+      <h2 className="question-title">Result</h2>
+      <p className="score">
+        Your Score: <b>{score} / {questions.length}</b>
       </p>
       <Link to="/">
         <button className="button">Home</button>

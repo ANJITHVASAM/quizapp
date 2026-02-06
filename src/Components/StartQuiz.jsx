@@ -1,31 +1,40 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./components.css";
 import Quiz from "./Quiz";
 import Result from "./Results";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const API_BASE_URL = "http://localhost:8888/questions";
-function StartQuiz({ level }) {
+function StartQuiz({ level, language }) {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
+
+  const navigate=useNavigate();
+  const resultsRef=useRef(null);
+
   const startQuiz = async () => {
-    const res = await fetch(`${API_BASE_URL}/quiz?level=${level}&numQ=10`);
+    const res = await fetch(
+      `${API_BASE_URL}/quiz?language=${language}&level=${level}&numQ=5`,
+    );
     const data = await res.json();
     setQuestions(data);
     setSubmitted(false);
     setAnswers({});
+
   };
   const submitQuiz = () => {
     setSubmitted(true);
   };
   useEffect(() => {
     startQuiz();
+    resultsRef.current?.scrollIntoView({behavior:'smooth'});
   }, []);
   return (
     <div className="container">
       {questions.length > 0 && (
         <Quiz
+          language={language}
           questions={questions}
           answers={answers}
           setAnswers={setAnswers}
@@ -38,9 +47,7 @@ function StartQuiz({ level }) {
             Submit Quiz
           </button>
           <Link to="/">
-            <button className="button">
-                Home
-            </button>
+            <button className="button">Home</button>
           </Link>
         </>
       )}
