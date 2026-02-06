@@ -10,7 +10,7 @@ function Result({ questions, answers }) {
       <p>
         Your Score: {score} / {questions.length}
       </p>
-      <Link to="/homepage">
+      <Link to="/">
         <button className="button">Home</button>
       </Link>
     </div>

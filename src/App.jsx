@@ -9,7 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/homepage" element={<HomePage level={level} setLevel={setLevel} />} />
+        <Route path="/" element={<HomePage level={level} setLevel={setLevel} />} />
         <Route path="/quiz" element={<StartQuiz level={level} />} />
       </Routes>
     </BrowserRouter>

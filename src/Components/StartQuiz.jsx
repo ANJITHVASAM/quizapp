@@ -37,7 +37,7 @@ function StartQuiz({ level }) {
           <button onClick={submitQuiz} className="button">
             Submit Quiz
           </button>
-          <Link to="/homepage">
+          <Link to="/">
             <button className="button">
                 Home
             </button>
