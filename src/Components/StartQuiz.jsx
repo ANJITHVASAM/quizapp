@@ -4,7 +4,7 @@ import Quiz from "./Quiz";
 import Result from "./Results";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_BASE_URL = "https://quizapp-backend-gcjy.onrender.com/questions/";
+const API_BASE_URL = "https://quizapp-backend-gcjy.onrender.com/questions";
 function StartQuiz({ level, language }) {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
