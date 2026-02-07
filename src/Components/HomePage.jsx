@@ -34,9 +34,9 @@ function HomePage({level, setLevel, language, setLanguage}) {
           <option value="hard">Hard</option>
         </select>
         <br />
-        {/* <Link to="/quiz">
+        <Link to="/quiz">
             <button className="button" disabled={!level || !language}>Start Quiz</button>
-        </Link> */}
+        </Link>
       </div>
     </div>
   );
