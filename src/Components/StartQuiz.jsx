@@ -75,7 +75,7 @@ function StartQuiz({ level, language }) {
           ) : (
             <div ref={resultsRef}>
               <Result questions={questions} answers={answers} />
-              <button onClick={() => navigate("/")} className="button">Go Home</button>
+              {/* <button onClick={() => navigate("/")} className="button">Go Home</button> */}
             </div>
           )}
         </>
