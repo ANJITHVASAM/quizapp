@@ -4,7 +4,7 @@ import Quiz from "./Quiz";
 import Result from "./Results";
 import { Link, useNavigate } from "react-router-dom";
 
-const API_BASE_URL = `${REACT_APP_API_URL}`;
+const API_BASE_URL = `${VITE_API_URL}`;
 function StartQuiz({ level, language }) {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
