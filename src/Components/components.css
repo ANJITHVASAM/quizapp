@@ -67,22 +67,6 @@ body{
     display: block;
     margin-bottom: 5px;
 }
-/* For Normal Effect */
-/* .options{
-    font-family: Arial sans-serif;
-    display: block;
-    margin-bottom: 5px;
-    background: linear-gradient(180deg, #44cc44 0%, #228822 50%, #116611 100%);
-    color: white;
-    padding: 4px 10px;
-    border: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 
-                inset 0 1px 1px rgba(255, 255, 255, 0.4);
-    letter-spacing: 1px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-} */
 
 .options {
     position: relative;
@@ -157,4 +141,8 @@ input[type="checkbox"]{
 .main-heading-bold{
     text-transform: uppercase;
     color: rgb(20, 147, 20);
+}
+
+.to-capital{
+    text-transform: uppercase;
 }
