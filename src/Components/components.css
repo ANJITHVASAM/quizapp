@@ -66,6 +66,7 @@ body{
 .option {
     display: block;
     margin-bottom: 5px;
+    font-size: 10px;
 }
 
 .options {
