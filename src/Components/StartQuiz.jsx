@@ -33,10 +33,6 @@ function StartQuiz({ level, language }) {
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
-        if(!language || !level){
-          window.location.href="/";
-        }
-        else{
           setLoading(false);
         }
     }
@@ -51,7 +47,12 @@ function StartQuiz({ level, language }) {
   };
 
   useEffect(() => {
-    startQuiz();
+    const navEntries=window.performance.getEntriesByType('navigation');
+    if(navEntries.length>0 && navEntries[0].type==='reload'){
+      console.log("redirecting...")
+      window.location.href="/";
+    }
+    else startQuiz();
   }, [level, language]); // Re-run if level or language changes
 
   if (loading) return <div className="container"><div className="options"><h3 className="main-heading">Loading Quiz...</h3></div></div>;
