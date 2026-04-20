@@ -47,12 +47,6 @@ function StartQuiz({ level, language }) {
   };
 
   useEffect(() => {
-    const navEntries=window.performance.getEntriesByType('navigation');
-    if(navEntries.length>0 && navEntries[0].type==='reload'){
-      console.log("redirecting...")
-      window.location.href="/";
-    }
-    else{
       startQuiz();
     }
   }, [level, language]); // Re-run if level or language changes
