@@ -52,7 +52,9 @@ function StartQuiz({ level, language }) {
       console.log("redirecting...")
       window.location.href="/";
     }
-    else startQuiz();
+    else{
+      startQuiz();
+    }
   }, [level, language]); // Re-run if level or language changes
 
   if (loading) return <div className="container"><div className="options"><h3 className="main-heading">Loading Quiz...</h3></div></div>;
