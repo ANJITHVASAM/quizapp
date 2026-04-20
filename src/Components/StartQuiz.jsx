@@ -23,9 +23,9 @@ function StartQuiz({ level, language }) {
       const res = await fetch(
         `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=5`
       );
-      
+
       if (!res.ok) throw new Error("Network response was not ok");
-      
+
       const data = await res.json();
       setQuestions(data);
       setSubmitted(false);
@@ -33,6 +33,11 @@ function StartQuiz({ level, language }) {
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
+      setLoading(false);
+        if(!language || !level){
+          window.location.href="/";
+        }
+        else{
           setLoading(false);
         }
     }
@@ -47,8 +52,7 @@ function StartQuiz({ level, language }) {
   };
 
   useEffect(() => {
-      startQuiz();
-    }
+    startQuiz();
   }, [level, language]); // Re-run if level or language changes
 
   if (loading) return <div className="container"><div className="options"><h3 className="main-heading">Loading Quiz...</h3></div></div>;
@@ -64,7 +68,7 @@ function StartQuiz({ level, language }) {
             setAnswers={setAnswers}
             submitted={submitted}
           />
-          
+
           {!submitted ? (
             <div className="button-group">
               <button onClick={submitQuiz} className="button">
