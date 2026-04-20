@@ -33,7 +33,12 @@ function StartQuiz({ level, language }) {
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
-      setLoading(false);
+        if(!language || !level){
+          window.location.href="/";
+        }
+        else{
+          setLoading(false);
+        }
     }
   };
 
