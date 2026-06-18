@@ -1,5 +1,5 @@
 body{
-    background: #000;
+    background: rgb(0, 0, 0);
     overflow-y: auto;
     height: 100vh;
 }
@@ -8,7 +8,7 @@ body{
     margin: auto;
     padding: 20px;
     font-family: Arial sans-serif;
-    background: #000;
+    background: #bead4a;
 }
 .card {
     border: 1px solid #ddd;
@@ -18,8 +18,8 @@ body{
 }
 .button {
   margin: 15px 15px 15px 0px;
-  background: linear-gradient(180deg, #44cc44 0%, #228822 50%, #116611 100%);
-  color: white;
+  background: #ffd900;
+  color: #2A2312;
   padding: 8px 12px;
   font-size: 15px;
   font-weight: bold;
@@ -74,8 +74,8 @@ body{
     font-family: Arial, sans-serif;
     display: block;
     margin-bottom: 10px;
-    background: linear-gradient(180deg, #44cc44 0%, #228822 50%, #116611 100%);
-    color: white;
+    background: #d5c255;
+    color: #2A2312;
     padding: 4px 10px;
     border: none;
     border-radius: 5px;
@@ -108,10 +108,13 @@ body{
 }
 
 
+
+
 .selectOption{
     width: 150px;
     font-size: 15px;
     padding: 4px 6px;
+    background-color: #d5c255;
 }
 .right-answer{
     color: rgb(19, 211, 19);
@@ -123,27 +126,31 @@ body{
     font-size: 15px;
 }
 select:valid{
-    border: 3px solid green;
+    border: 3px solid black;
     border-radius: 2px;
 }
 option:checked{
-    background-color: green;
+    background-color: black;
 }
 .question-title{
     color: black;
-    font-size: 18px;
 }
 input[type="checkbox"]{
-    accent-color: rgb(16, 68, 16);
-}
-.main-heading{
-    color: #fff;
+    accent-color: rgb(0, 0, 0);
 }
 .main-heading-bold{
     text-transform: uppercase;
     color: rgb(20, 147, 20);
 }
-
 .to-capital{
     text-transform: uppercase;
+}
+
+.selectNoOfQuestions{
+    border: solid 3px rgb(0, 0, 0);
+    font-size: 15px;
+    padding: 4px 6px;
+    width: 40px;
+    border-radius: 2px;
+    background: #d5c255;
 }
