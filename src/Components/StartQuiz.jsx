@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 // 1. Correct way to access the Environment Variable (Vite example)
 const API_BASE_URL = import.meta.env.VITE_API_URL || "https://quizapp-backend-gcjy.onrender.com";
 
-function StartQuiz({ level, language }) {
+function StartQuiz({ level, language, noOfQuestions }) {
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
@@ -21,7 +21,7 @@ function StartQuiz({ level, language }) {
       setLoading(true);
       // 2. Ensure the path matches your Spring Boot @RequestMapping("/questions")
       const res = await fetch(
-        `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=5`
+        `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=${noOfQuestions}`
       );
 
       if (!res.ok) throw new Error("Network response was not ok");
