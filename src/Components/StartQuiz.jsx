@@ -65,6 +65,7 @@ function StartQuiz({ level, language, noOfQuestions }) {
         </div>
       </div>
     );
+  }
 
   return (
     <div className="container">
