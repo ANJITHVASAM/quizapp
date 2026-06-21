@@ -62,7 +62,7 @@ function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNo
         <input 
           className="selectNoOfQuestions" 
           type="number" 
-          defaultValue="5" // Fully controlled input
+          defaultValue={5} 
           min={1} 
           max={15}
           onChange={(e) => setNoOfQuestions(e.target.value)}
