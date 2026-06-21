@@ -9,9 +9,9 @@ function QuestionCard({ question, index, answers, setAnswers, submitted }) {
   };
   return (
     <div className="options">
-      <h4 className="question-title">
+      <h5 className="question-title">
         {index + 1}. {question.questionTitle}
-      </h4>
+      </h5>
       {[
         question.option1,
         question.option2,
@@ -19,10 +19,16 @@ function QuestionCard({ question, index, answers, setAnswers, submitted }) {
         question.option4,
       ].map((opt) => (
         <label key={opt} className="option">
-          <input className="checkbox" type="checkbox" name={`q-${question.id}`} value={opt} disabled={submitted} 
-                checked={answers[question.id] === opt} onChange={() => handleChange(opt)}
+          <input 
+            type="checkbox" 
+            name={`q-${question.id}`} 
+            value={opt} 
+            disabled={submitted} 
+            checked={answers[question.id] === opt} 
+            onChange={() => handleChange(opt)}
+            style={{marginRight:"10px",background:'#989895'}}
           />
-          {opt}
+          <p style={{display:"inline",color:'#989895'}}>{opt}</p>
         </label>
       ))}
       {submitted && sel && (<p>Correct Answer: <b className="right-answer">{question.rightAnswer}</b></p>)}
