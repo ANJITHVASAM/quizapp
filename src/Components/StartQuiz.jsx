@@ -55,7 +55,16 @@ function StartQuiz({ level, language, noOfQuestions }) {
     startQuiz();
   }, [level, language]); // Re-run if level or language changes
 
-  if (loading) return <div className="container"><div className="options"><h3 className="main-heading">Loading Quiz...</h3></div></div>;
+  if (loading) {
+    return(
+      <div className="container">
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="container">
