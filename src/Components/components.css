@@ -145,7 +145,7 @@ option:checked{
     background-color: black;
 }
 input[type="checkbox"]{
-    accent-color: rgb(0, 0, 0);
+    accent-color: rgb(20, 147, 20);
 }
 .main-heading-bold{
     text-transform: uppercase;
