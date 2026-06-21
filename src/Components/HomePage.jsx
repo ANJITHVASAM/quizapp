@@ -65,7 +65,7 @@ function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNo
           defaultValue="5" // Fully controlled input
           min={1} 
           max={15}
-          onChange={(e) => setNoOfQuestions(Number(e.target.value))}
+          onChange={(e) => setNoOfQuestions(e.target.value)}
         />
         <br />
         <Link to="/quiz">
