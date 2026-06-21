@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 function App() {
   const [language, setLanguage] = useState("");
   const [level, setLevel] = useState("");
-  const [noOfQuestions,setNoOfQuestions]=useState("");
+  const [noOfQuestions,setNoOfQuestions]=useState("5");
   return (
     <BrowserRouter>
       <Routes>
