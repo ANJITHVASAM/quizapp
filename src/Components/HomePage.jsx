@@ -2,7 +2,10 @@ import { Link } from "react-router-dom";
 import "./components.css";
 
 function HomePage({level, setLevel, language, setLanguage, noOfQuestions, setNoOfQuestions }) {
-
+  
+  const [languageWarning, setLanguageWarning] =useState(false);
+  const [levelWarning, setLevelWarning] =useState(false);
+  
   return (
     <div className="container">
       <h1 className="main-heading">Student Quiz App</h1>
