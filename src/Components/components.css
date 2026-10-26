@@ -3,13 +3,21 @@ body{
     overflow-y: auto;
     height: 100vh;
 }
+.container-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 .container {
     max-width: 500px;
-    margin: auto;
     padding: 20px;
     font-family: Arial sans-serif;
-    background: #313028;
+    background: #0a0a056b;
     color: #fff;
+    box-shadow: 0 0 15px rgba(110, 110, 110, 0.2), 
+                inset 0 0 0.5px 0.5px rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
 }
 .card {
     border: 1px solid #ddd;
@@ -25,79 +33,42 @@ body{
 .options {
     position: relative;
     overflow: hidden;   
-    font-family: Arial, sans-serif;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
     display: block;
     margin-bottom: 10px;
-    background: #313028;
+    background: rgba(128, 128, 128, 0.323);
     color: #fff;
     padding: 4px 10px;
     border: none;
     border-radius: 5px;
-    letter-spacing: 1px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 
                 inset 0 1px 1px rgba(255, 255, 255, 0.4);
     cursor: pointer;
 }
 
-.options::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%; 
-    width: 50%; 
-    height: 100%;
-    background: linear-gradient(
-        90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.4), 
-        transparent
-    );
-    transform: skewX(-25deg);
-    transition: none;
-}
-
-.options:hover::after {
-    left: 150%; 
-    transition: left 0.6s ease-in-out;
+select,input{
+    margin: 5px 0px;
 }
 
 .button {
   margin: 15px 15px 15px 0px;
-  background: #514f42;
-  color: #2A2312;
+  background: gray;
+  color: #000;
   padding: 8px 12px;
   font-size: 15px;
   font-weight: bold;
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.599), 
-              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.821);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
-.button::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: rgba(255, 255, 255, 0.113);
-  transform: rotate(45deg);
-  transition: all 0.5s ease;
-  pointer-events: none;
-}
-
-.button:hover {
-  transform: translateY(-3px);
-  filter: brightness(1.1);
-  box-shadow: 2px 4px 15px rgb(0, 0, 0);
-  color: rgb(0, 0, 0);  
+.button:hover{
+    color: gray;
+    background: #000;
+    transition: 0.5s;
+    box-shadow: 5px 5px 15px rgba(152, 151, 151, 0.21);
 }
 
 .hero-badge,.hero-p{
@@ -114,6 +85,7 @@ body{
 }
 
 .selectOption{
+    display: block;
     width: 150px;
     font-size: 15px;
     padding: 4px 6px;
@@ -132,6 +104,12 @@ body{
 
 .warning-message-show {
   display: block;
+}
+.warning{
+    color: red;
+    font-size: 10px;
+    padding: 1px 0 0 0;
+    height: 10px;
 }
 .score{
     font-size: 15px;
@@ -156,6 +134,7 @@ input[type="checkbox"]{
 }
 
 .selectNoOfQuestions{
+    display: block;
     border: solid 3px rgb(0, 0, 0);
     font-size: 15px;
     padding: 4px 6px;
