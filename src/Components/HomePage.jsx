@@ -15,7 +15,7 @@ function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNo
       if (!language) setShowLanguageWarning(true);
       if (!level) setShowLevelWarning(true);
       console.log("Form submitted with values:", { level, language, noOfQuestions });
-      navigate("/quiz", {state: { level, language, noOfQuestions }})
+      if(level && language) navigate("/quiz", {state: { level, language, noOfQuestions }});
     }
     catch (error) {
       console.error("Error during form submission:", error);
