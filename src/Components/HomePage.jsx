@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./components.css";
 import { useState } from "react";
 
 function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNoOfQuestions }) {
 
+  const navigate = useNavigate();
 
   const [showLanguageWarning, setShowLanguageWarning] = useState(false);
   const [showLevelWarning, setShowLevelWarning] = useState(false);
@@ -13,7 +14,8 @@ function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNo
     try {
       if (!language) setShowLanguageWarning(true);
       if (!level) setShowLevelWarning(true);
-      console.log("Form submitted");
+      console.log("Form submitted with values:", { level, language, noOfQuestions });
+      navigate("/quiz", {state: { level, language, noOfQuestions }})
     }
     catch (error) {
       console.error("Error during form submission:", error);
