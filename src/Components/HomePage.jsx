@@ -101,7 +101,6 @@ function HomePage({ level, setLevel, language, setLanguage, noOfQuestions, setNo
             <button
               type="submit"
               className="button"
-            // disabled={!level || !language || noOfQuestions < 1 || noOfQuestions > 15}
             >
               Start Quiz
             </button>

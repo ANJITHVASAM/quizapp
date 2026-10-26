@@ -4,7 +4,6 @@ import Quiz from "./Quiz";
 import Result from "./Results";
 import { Link, useNavigate } from "react-router-dom";
 
-// 1. Correct way to access the Environment Variable (Vite example)
 const API_BASE_URL = import.meta.env.VITE_API_URL || "https://quizapp-backend-gcjy.onrender.com";
 
 function StartQuiz({ level, language, noOfQuestions }) {
@@ -15,6 +14,11 @@ function StartQuiz({ level, language, noOfQuestions }) {
 
   const navigate = useNavigate();
   const resultsRef = useRef(null);
+  useEffect(() => {
+    if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+      navigate("/", { replace: true });
+    }
+  },[navigate]);
 
   const startQuiz = async () => {
     try {
@@ -45,7 +49,6 @@ function StartQuiz({ level, language, noOfQuestions }) {
 
   const submitQuiz = () => {
     setSubmitted(true);
-    // Scroll to results after a short delay to let the component render
     setTimeout(() => {
       resultsRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
@@ -53,7 +56,7 @@ function StartQuiz({ level, language, noOfQuestions }) {
 
   useEffect(() => {
     startQuiz();
-  }, [level, language]); // Re-run if level or language changes
+  }, [level, language]);
 
   if (loading) {
     return(
