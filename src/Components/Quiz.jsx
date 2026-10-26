@@ -8,7 +8,7 @@ function Quiz({ language, questions, answers, setAnswers, submitted }) {
 
   useEffect(() => {
     if (performance.getEntriesByType("navigation")[0].type === "reload") {
-      navigate("/");
+      navigate("/", { replace: true });
     }
   },[navigate]);
   return (
