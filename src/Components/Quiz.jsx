@@ -4,7 +4,7 @@ import "./components.css";
 
 function Quiz({ language, questions, answers, setAnswers, submitted }) {
 
-  const navigate = useNavigateavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (performance.getEntriesByType("navigation")[0].type === "reload") {
