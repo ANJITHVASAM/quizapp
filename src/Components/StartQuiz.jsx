@@ -4,7 +4,7 @@ import Quiz from "./Quiz";
 import Result from "./Results";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || "https://quizapp-backend-gcjy.onrender.com";
+const API_BASE_URL = import.meta.env.VITE_API_URL || "https://onrender.com";
 
 function StartQuiz() {
   const location = useLocation();
@@ -12,7 +12,9 @@ function StartQuiz() {
   const resultsRef = useRef(null);
   const hasFetched = useRef(false);
 
-  const { language, level, noOfQuestions } = location.state || {};
+  const initialLanguage = location.state?.language || sessionStorage.getItem("quiz_language") || "";
+  const initialLevel = location.state?.level || sessionStorage.getItem("quiz_level") || "";
+  const initialNoOfQuestions = location.state?.noOfQuestions || sessionStorage.getItem("quiz_noOfQuestions") || "5";
 
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
@@ -20,17 +22,25 @@ function StartQuiz() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!location.state || !language || !level || !noOfQuestions) {
+    if (location.state?.language) {
+      sessionStorage.setItem("quiz_language", location.state.language);
+      sessionStorage.setItem("quiz_level", location.state.level);
+      sessionStorage.setItem("quiz_noOfQuestions", String(location.state.noOfQuestions));
+    }
+  }, [location.state]);
+
+  useEffect(() => {
+    if (!initialLanguage || !initialLevel) {
       navigate("/", { replace: true });
     }
-  }, [location.state, language, level, noOfQuestions, navigate]);
+  }, [initialLanguage, initialLevel, navigate]);
 
   const startQuiz = async () => {
-    if (!language || !level) return;
+    if (!initialLanguage || !initialLevel) return;
     try {
       setLoading(true);
       const res = await fetch(
-        `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=${noOfQuestions}`
+        `${API_BASE_URL}/questions/quiz?language=${initialLanguage}&level=${initialLevel}&numQ=${initialNoOfQuestions}`
       );
 
       if (!res.ok) throw new Error("Network response was not ok");
@@ -54,13 +64,13 @@ function StartQuiz() {
   };
 
   useEffect(() => {
-    if (language && level && noOfQuestions && !hasFetched.current) {
+    if (initialLanguage && initialLevel && initialNoOfQuestions && !hasFetched.current) {
       hasFetched.current = true;
       startQuiz();
     }
-  }, [level, language, noOfQuestions]);
+  }, [initialLanguage, initialLevel, initialNoOfQuestions]);
 
-  if (!location.state || !language || !level || !noOfQuestions) {
+  if (!initialLanguage || !initialLevel) {
     return null;
   }
 
@@ -81,7 +91,7 @@ function StartQuiz() {
       {questions.length > 0 ? (
         <>
           <Quiz
-            language={language}
+            language={initialLanguage}
             questions={questions}
             answers={answers}
             setAnswers={setAnswers}
@@ -106,7 +116,9 @@ function StartQuiz() {
       ) : (
         <div className="container">
           <div className="options">
-            <p className="main-heading">No questions found for <b className="to-capital">{language} ({level})</b>.</p>
+            <p className="main-heading">
+              No questions found for <b className="to-capital">{initialLanguage} ({initialLevel})</b>.
+            </p>
             <Link to="/"><button className="button">Back</button></Link>
           </div>
         </div>
