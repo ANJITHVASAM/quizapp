@@ -18,17 +18,22 @@ function StartQuiz({ level, language, noOfQuestions }) {
     if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
       navigate("/", { replace: true });
     }
-  },[navigate]);
+  }, [navigate]);
 
   const startQuiz = async () => {
     try {
+      if (!language || !level) {
+        navigate("/", { replace: true });
+        return;
+      }
+
       setLoading(true);
-      // 2. Ensure the path matches your Spring Boot @RequestMapping("/questions")
       const res = await fetch(
         `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=${noOfQuestions}`
       );
 
       if (!res.ok) throw new Error("Network response was not ok");
+
 
       const data = await res.json();
       setQuestions(data);
@@ -36,14 +41,8 @@ function StartQuiz({ level, language, noOfQuestions }) {
       setAnswers({});
     } catch (error) {
       console.error("Fetch error:", error);
-    } finally {
+    } finally{
       setLoading(false);
-        if(!language || !level){
-          window.location.href="/";
-        }
-        else{
-          setLoading(false);
-        }
     }
   };
 
@@ -55,11 +54,13 @@ function StartQuiz({ level, language, noOfQuestions }) {
   };
 
   useEffect(() => {
-    startQuiz();
-  }, [level, language]);
+    if (language && level && noOfQuestions) {
+      startQuiz();
+    }
+  }, [level, language, noOfQuestions]);
 
   if (loading) {
-    return(
+    return (
       <div className="container">
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
