@@ -2,31 +2,32 @@ import { useEffect, useRef, useState } from "react";
 import "./components.css";
 import Quiz from "./Quiz";
 import Result from "./Results";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || "https://quizapp-backend-gcjy.onrender.com";
 
-function StartQuiz({ level, language, noOfQuestions }) {
+function StartQuiz() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const resultsRef = useRef(null);
+  const hasFetched = useRef(false);
+
+  const { language, level, noOfQuestions } = location.state || {};
+
   const [questions, setQuestions] = useState([]);
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(true); // Added loading state
+  const [loading, setLoading] = useState(true);
 
-  const navigate = useNavigate();
-  const resultsRef = useRef(null);
   useEffect(() => {
-    if (performance.getEntriesByType("navigation")[0]?.type === "reload") {
+    if (!location.state || !language || !level || !noOfQuestions) {
       navigate("/", { replace: true });
     }
-  }, [navigate]);
+  }, [location.state, language, level, noOfQuestions, navigate]);
 
   const startQuiz = async () => {
+    if (!language || !level) return;
     try {
-      if (!language || !level) {
-        navigate("/", { replace: true });
-        return;
-      }
-
       setLoading(true);
       const res = await fetch(
         `${API_BASE_URL}/questions/quiz?language=${language}&level=${level}&numQ=${noOfQuestions}`
@@ -34,14 +35,13 @@ function StartQuiz({ level, language, noOfQuestions }) {
 
       if (!res.ok) throw new Error("Network response was not ok");
 
-
       const data = await res.json();
       setQuestions(data);
       setSubmitted(false);
       setAnswers({});
     } catch (error) {
       console.error("Fetch error:", error);
-    } finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -54,10 +54,15 @@ function StartQuiz({ level, language, noOfQuestions }) {
   };
 
   useEffect(() => {
-    if (language && level && noOfQuestions) {
+    if (language && level && noOfQuestions && !hasFetched.current) {
+      hasFetched.current = true;
       startQuiz();
     }
   }, [level, language, noOfQuestions]);
+
+  if (!location.state || !language || !level || !noOfQuestions) {
+    return null;
+  }
 
   if (loading) {
     return (
@@ -95,7 +100,6 @@ function StartQuiz({ level, language, noOfQuestions }) {
           ) : (
             <div ref={resultsRef}>
               <Result questions={questions} answers={answers} />
-              {/* <button onClick={() => navigate("/")} className="button">Go Home</button> */}
             </div>
           )}
         </>
